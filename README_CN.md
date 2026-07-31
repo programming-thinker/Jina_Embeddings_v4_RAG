@@ -159,7 +159,27 @@ python API_KIT/web_server.py --demo
 界面包含聊天气泡、引用来源面板（省份 / 相似度 / 原文摘要）、分阶段进度态和示例问题。
 
 - **Demo 模式**：TF-IDF 检索 + 原文摘编；设置环境变量 `SILICONFLOW_API_KEY` 后自动改用 LLM 生成完整答案
-- **完整模式**：按下方步骤配好 `config/config.py`、Jina 模型和向量索引后，去掉 `--demo` 参数即自动启用（失败会自动降级回 Demo 模式）
+- **完整模式**：按下方步骤部署后，去掉 `--demo` 参数即自动启用（失败会自动降级回 Demo 模式）
+
+### 🚀 完整模式（Jina v4 + FAISS + LLM）一键部署
+
+```bash
+# 1. 安装依赖
+pip install -r requirements.txt
+
+# 2. 下载 Jina v4 权重（约 7.5GB，只需一次；国内先设 HF_ENDPOINT=https://hf-mirror.com）
+pip install -U huggingface_hub
+hf download jinaai/jina-embeddings-v4 --local-dir models/jina-embeddings-v4
+
+# 3. 一键预检 + 建索引（自动生成 config、检测 GPU/CPU、构建 FAISS 索引）
+export SILICONFLOW_API_KEY=你的密钥   # 可选，不设则无法生成答案但可建索引
+python setup_full.py
+
+# 4. 启动
+python API_KIT/web_server.py
+```
+
+预期耗时：建索引 GPU 约 2~5 分钟、CPU 约 15~40 分钟（只建一次）；查询时 CPU 每次多 1~3 秒编码时间。前端顶栏显示「完整系统 · Jina v4」即部署成功。
 
 ### 5分钟快速体验
 
