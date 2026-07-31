@@ -146,6 +146,21 @@ unzip "31省区市政府工作报告.zip"
 
 ## ⚡ 快速开始
 
+### 💬 网页聊天前端（推荐，1 分钟跑起来）
+
+无需 GPU、无需模型权重、无需 API Key，用仓库自带的 855 块数据即可体验完整交互：
+
+```bash
+pip install fastapi uvicorn scikit-learn numpy
+python API_KIT/web_server.py --demo
+# 浏览器打开 http://127.0.0.1:8000
+```
+
+界面包含聊天气泡、引用来源面板（省份 / 相似度 / 原文摘要）、分阶段进度态和示例问题。
+
+- **Demo 模式**：TF-IDF 检索 + 原文摘编；设置环境变量 `SILICONFLOW_API_KEY` 后自动改用 LLM 生成完整答案
+- **完整模式**：按下方步骤配好 `config/config.py`、Jina 模型和向量索引后，去掉 `--demo` 参数即自动启用（失败会自动降级回 Demo 模式）
+
 ### 5分钟快速体验
 
 ```bash
