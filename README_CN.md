@@ -161,6 +161,15 @@ python API_KIT/web_server.py --demo
 - **Demo 模式**：TF-IDF 检索 + 原文摘编；设置环境变量 `SILICONFLOW_API_KEY` 后自动改用 LLM 生成完整答案
 - **完整模式**：按下方步骤部署后，去掉 `--demo` 参数即自动启用（失败会自动降级回 Demo 模式）
 
+### 🐳 用 Docker 启动（环境隔离，推荐）
+
+```bash
+docker compose up -d demo     # Demo 模式，约 3 分钟
+docker compose up -d full     # 完整模式，需先下载权重到 ./models
+```
+
+> **想部署到云服务器？** 见 **[DEPLOY_CN.md](DEPLOY_CN.md)** —— 从开通服务器、放行端口、安装 Docker 到两条部署路线的完整教程，含访问控制、成本管理与常见问题排查。
+
 ### 🚀 完整模式（Jina v4 + FAISS + LLM）一键部署
 
 ```bash
